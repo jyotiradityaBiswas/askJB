@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}Inbox | askJB{% endblock %}
+
+{% block content %}
+<main class="inbox-page">
+    <header class="inbox-header">
+        <div class="brand">ask<span>JB</span></div>
+        <p>YOUR INBOX</p>
+    </header>
+
+    <section class="messages">
+        {% if messages %}
+            {% for message in messages %}
+                <article
+                    class="message-card {% if message.read %}is-read{% endif %}"
+                    data-message-id="{{ message.id }}"
+                >
+                    <div class="message-content">
+                        {{ message.content }}
+                    </div>
+
+                    <div class="message-footer">
+                        <div class="message-meta">
+                            {{ message.created_at.strftime("%d %b %Y · %H:%M") }}
+                        </div>
+
+                        <div class="message-actions">
+                            <span class="message-status">
+                                {% if message.read %}
+                                    READ
+                                {% else %}
+                                    UNREAD
+                                {% endif %}
+                            </span><br>
+
+                            <button
+                                class="reply-button"
+                                data-message="{{ message.content }}"
+                                data-message-id="{{ message.id }}"
+                            >
+                                Reply
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
+        {% else %}
+            <div class="empty-state">
+                <h1>Nothing yet.</h1>
+                <p>Your anonymous messages will appear here.</p>
+            </div>
+        {% endif %}
+    </section>
+
+    <div class="reply-modal" id="reply-modal">
+        <div class="reply-modal-backdrop"></div>
+
+        <div class="reply-modal-card">
+            <button class="modal-close" id="modal-close">×</button>
+
+            <div class="story-editor">
+                <div class="story-preview-container">
+                    <img
+                        id="story-preview"
+                        class="story-preview"
+                        alt="Story card preview"
+                    >
+                </div>
+
+                <div class="story-controls">
+                    <p class="eyebrow">REPLY TO ANONYMOUS</p>
+
+                    <div class="question-preview" id="question-preview"></div>
+
+                    <textarea
+                        id="reply-text"
+                        maxlength="500"
+                        placeholder="Write your reply..."
+                    ></textarea>
+
+                    <div class="reply-modal-footer">
+                        <span id="reply-counter">0 / 500</span>
+
+                        <button id="generate-card">
+                            Download Story →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</main>
+{% endblock %}

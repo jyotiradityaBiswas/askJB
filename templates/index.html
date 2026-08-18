@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}askJB{% endblock %}
+
+{% block content %}
+<main class="page">
+
+    <section class="card">
+        <div class="brand">ask<span>JB</span></div>
+
+        <div class="heading">
+            <h1>Send Me a Message</h1>
+            <p class="subtitle">
+                Say whatever is on your mind..
+            </p>
+        </div>
+
+        <form class="message-form" id="message-form">
+            <textarea
+                id="message"
+                name="message"
+                maxlength="300"
+                placeholder="Type something..."
+                aria-label="Anonymous message"
+                required
+            ></textarea>
+
+            <div class="form-footer">
+                <span class="counter">0 / 300</span>
+                <button type="submit">Send anonymously</button>
+            </div>
+        </form>
+
+        <p class="privacy">Your message is anonymous.</p>
+    </section>
+
+</main>
+
+<div class="success-modal" id="success-modal">
+    <div class="success-modal-backdrop"></div>
+
+    <div class="success-modal-content">
+        <button
+            class="success-modal-close"
+            id="success-close"
+            type="button"
+            aria-label="Close"
+        >
+            ×
+        </button>
+
+        <div class="success-modal-title">
+            Sent anonymously
+        </div>
+
+        <p class="success-modal-text">
+            Your message has been sent successfully.
+        </p>
+    </div>
+</div>
+{% endblock %}
